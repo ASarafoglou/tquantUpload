@@ -1,0 +1,3 @@
+Identifiability: This app visualizes the trade-off between the parameters of a
+non-identifiable basic local independence model.
+

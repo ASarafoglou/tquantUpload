@@ -1,0 +1,34 @@
+model{
+  # observed values
+  for (j in 1:npatterns) {
+    for (q in 1:nstates) {
+      for (i in 1:nitems) {
+       tmp[i,j,q] <- beta[i]^((1 - R[j,i]) * K[q,i]) * 
+                      (1 - beta[i])^(R[j,i] * K[q,i]) *
+                     eta[i]^(R[j,i] * (1 - K[q,i])) * 
+                     (1 - eta[i])^((1 - R[j,i]) * (1 - K[q,i]))
+      }
+      P.R.K[j,q] <- prod(tmp[,j,q])
+    }
+  }
+  P.R[1:npatterns] <- P.R.K[,] %*% P.K[]
+  N.R[1:npatterns] ~ dmulti(P.R[], n.observ)
+  # priors
+  beta[1] ~ dbeta(beta.a[1], beta.b[1])
+  beta[2] ~ dbeta(beta.a[2], beta.b[2])
+  beta[3] ~ dbeta(beta.a[3], beta.b[3])
+  beta[4] ~ dbeta(beta.a[4], beta.b[4])
+  eta[1] ~ dbeta(eta.a[1], eta.b[1])
+  eta[2] ~ dbeta(eta.a[2], eta.b[2])
+  eta[3] ~ dbeta(eta.a[3], eta.b[3])
+  eta[4] ~ dbeta(eta.a[4], eta.b[4])
+  # for (i in 1:nitems) {
+  #   beta[i] ~ dbeta(1,1)
+  #   eta[i] ~ dbeta(1,1)
+  # }
+  
+  for(q in 1:nstates) {
+    alpha[q] <- 1
+  }
+  P.K[1:nstates] ~ ddirch(alpha[])
+}
