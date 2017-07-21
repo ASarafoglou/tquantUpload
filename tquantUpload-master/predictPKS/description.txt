@@ -1,0 +1,6 @@
+Classical and Bayesian parameter estimation: This app demonstrates classical
+
+and Bayesian parameter estimation methods for probabilistic knowledge
+
+structures.
+

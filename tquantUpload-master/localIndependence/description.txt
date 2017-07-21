@@ -1,0 +1,3 @@
+Local independence: This app exemplifies the local independence assumption of 
+the basic local independence model.
+
